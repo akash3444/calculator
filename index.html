@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Calculator</title>
+	<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="w-full flex flex-col items-center bg-gray-100">
+<!-- 	<h1 class="text-4xl font-bold text-gray-800 text-center mt-10">Calculator</h1>
+ -->
+	<div class="mt-10 mx-auto p-5 w-96 shadow-md border border-gray-100 bg-white rounded-lg overflow-hidden">
+		<div class="relative max-w-md shadow-inner bg-gray-50 border border-gray-100 h-40 rounded-lg">
+			<p id="result" class="absolute right-4 bottom-2 text-xl font-bold">0</p>
+		</div>
+
+		<div class="w-full grid grid-cols-4 gap-5 py-5">
+			<button
+				onclick="setDefault()" 
+				class="mx-auto hover:from-gray-500 hover:to-gray-700 hover:shadow-lg transition duration-300 font-semibold text-lg focus:outline-none focus:bg-yellow-500 focus:text-white h-14 w-14 bg-gradient-to-br from-gray-600 to-gray-900 shadow shadow-md rounded-md text-white">C</button>
+			<button 
+				onclick="appendToScreen('%')"
+				class="mx-auto hover:from-gray-500 hover:to-gray-700 hover:shadow-lg transition duration-300 font-semibold text-lg focus:outline-none focus:bg-yellow-500 focus:text-white h-14 w-14 bg-gradient-to-br from-gray-600 to-gray-900 shadow shadow-md rounded-md text-white">%</button>
+			<button 
+				onclick="deleteLast()"
+				class="mx-auto hover:from-gray-500 hover:to-gray-700 hover:shadow-lg transition duration-300 font-semibold text-lg focus:outline-none focus:bg-yellow-500 focus:text-white h-14 w-14 bg-gradient-to-br from-gray-600 to-gray-900 shadow shadow-md rounded-md text-white">DEL</button>
+			<button 
+				onclick="appendToScreen('/')"
+				class="mx-auto hover:from-gray-500 hover:to-gray-700 hover:shadow-lg transition duration-300 font-semibold text-lg focus:outline-none focus:bg-yellow-500 focus:text-white h-14 w-14 bg-gradient-to-br from-gray-600 to-gray-900 shadow shadow-md rounded-md text-white">/</button>
+			<button 
+				onclick="appendToScreen('7')"
+				class="mx-auto hover:bg-gray-50 focus:outline-none focus:bg-yellow-500 focus:text-white h-14 w-14 border border-gray-100 bg-white shadow shadow-md hover:shadow-inner rounded-md text-black">7</button>
+			<button 
+				onclick="appendToScreen('8')"
+				class="mx-auto hover:bg-gray-50 focus:outline-none focus:bg-yellow-500 focus:text-white h-14 w-14 border border-gray-100 bg-white shadow shadow-md hover:shadow-inner rounded-md text-black">8</button>
+			<button 
+				onclick="appendToScreen('9')"
+				class="mx-auto hover:bg-gray-50 focus:outline-none focus:bg-yellow-500 focus:text-white h-14 w-14 border border-gray-100 bg-white shadow shadow-md hover:shadow-inner rounded-md text-black">9</button>
+			<button 
+				onclick="appendToScreen('*')"
+				class="mx-auto hover:from-gray-500 hover:to-gray-700 hover:shadow-lg transition duration-300 font-semibold text-lg focus:outline-none focus:bg-yellow-500 focus:text-white h-14 w-14 bg-gradient-to-br from-gray-600 to-gray-900 shadow shadow-md rounded-md text-white">&times;</button>
+			<button 
+				onclick="appendToScreen('4')"
+				class="mx-auto hover:bg-gray-50 focus:outline-none focus:bg-yellow-500 focus:text-white h-14 w-14 border border-gray-100 bg-white shadow shadow-md hover:shadow-inner rounded-md text-black">4</button>
+			<button 
+				onclick="appendToScreen('5')"
+				class="mx-auto hover:bg-gray-50 focus:outline-none focus:bg-yellow-500 focus:text-white h-14 w-14 border border-gray-100 bg-white shadow shadow-md hover:shadow-inner rounded-md text-black">5</button>
+			<button 
+				onclick="appendToScreen('6')"
+				class="mx-auto hover:bg-gray-50 focus:outline-none focus:bg-yellow-500 focus:text-white h-14 w-14 border border-gray-100 bg-white shadow shadow-md hover:shadow-inner rounded-md text-black">6</button>
+			<button 
+				onclick="appendToScreen('-')"
+				class="mx-auto hover:from-gray-500 hover:to-gray-700 hover:shadow-lg transition duration-300 font-semibold text-lg focus:outline-none focus:bg-yellow-500 focus:text-white h-14 w-14 bg-gradient-to-br from-gray-600 to-gray-900 shadow shadow-md rounded-md text-white">-</button>
+			<button 
+				onclick="appendToScreen('1')"
+				class="mx-auto hover:bg-gray-50 focus:outline-none focus:bg-yellow-500 focus:text-white h-14 w-14 border border-gray-100 bg-white shadow shadow-md hover:shadow-inner rounded-md text-black">1</button>
+			<button 
+				onclick="appendToScreen('2')"
+				class="mx-auto hover:bg-gray-50 focus:outline-none focus:bg-yellow-500 focus:text-white h-14 w-14 border border-gray-100 bg-white shadow shadow-md hover:shadow-inner rounded-md text-black">2</button>
+			<button 
+				onclick="appendToScreen('3')"
+				class="mx-auto hover:bg-gray-50 focus:outline-none focus:bg-yellow-500 focus:text-white h-14 w-14 border border-gray-100 bg-white shadow shadow-md hover:shadow-inner rounded-md text-black">3</button>
+			<button 
+				onclick="appendToScreen('+')"
+				class="mx-auto hover:from-gray-500 hover:to-gray-700 hover:shadow-lg transition duration-300 font-semibold text-lg focus:outline-none focus:bg-yellow-500 focus:text-white h-14 w-14 bg-gradient-to-br from-gray-600 to-gray-900 shadow shadow-md rounded-md text-white">+</button>
+			<button 
+				onclick="appendToScreen('00')"
+				class="mx-auto hover:bg-gray-50 focus:outline-none focus:bg-yellow-500 focus:text-white h-14 w-14 border border-gray-100 bg-white shadow shadow-md hover:shadow-inner rounded-md text-black">00</button>
+			<button 
+				onclick="appendToScreen('0')"
+				class="mx-auto hover:bg-gray-50 focus:outline-none focus:bg-yellow-500 focus:text-white h-14 w-14 border border-gray-100 bg-white shadow shadow-md hover:shadow-inner rounded-md text-black">0</button>
+			<button 
+				onclick="appendToScreen('.')"
+				class="mx-auto hover:bg-gray-50 focus:outline-none focus:bg-yellow-500 focus:text-white h-14 w-14 border border-gray-100 bg-white shadow shadow-md hover:shadow-inner rounded-md text-black">.</button>
+			<button 
+				onclick="showResult()"
+				class="mx-auto hover:from-gray-500 hover:to-gray-700 hover:shadow-lg transition duration-300 font-semibold text-lg focus:outline-none focus:bg-yellow-500 focus:text-white h-14 w-14 bg-gradient-to-br from-gray-600 to-gray-900 shadow shadow-md rounded-md text-white">=</button>
+		</div>
+	</div>
+
+	<script src="./index.js"></script>
+</body>
+</html>
